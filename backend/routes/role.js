@@ -1,14 +1,18 @@
 const express = require("express");
 
-import { getRoleDetail, getRoleList, patchRole, storeRole } from "../controllers/role.js";
+const {
+  getRoleDetail,
+  getRoleList,
+  patchRole,
+  storeRole,
+} = require("../controllers/role.js");
 
 const router = express.Router();
 
 router.get("/detail", getRoleDetail);
 router.get("/list", getRoleList);
-router.post('/store', storeRole);
-router.patch('/patch', patchRole);
-router.delete('/delete/:id');
+router.post("/store", storeRole);
+router.patch("/patch", patchRole);
+router.delete("/delete/:id");
 
-
-export default router;
+module.exports = router;

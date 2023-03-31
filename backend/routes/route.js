@@ -1,10 +1,10 @@
 const express = require("express");
 
-import { getRouteDetail, getRouteList } from "../controllers/route.js";
+const { getRouteDetail, getRouteList } = require("../controllers/route.js");
 
 const router = express.Router();
 
 router.get("/detail", getRouteDetail);
-router.get("/list", getRouteList)
+router.get("/list", getRouteList);
 
-export default router;
+module.exports = router;

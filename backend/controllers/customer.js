@@ -101,8 +101,12 @@ module.exports = {
   getCustomerId: async (req, res) => {
     try {
       const { id } = req.params;
-      const customer = await Customer.findById(id);
-      res.status(200).json(customer);
+      const customer = await Customer.findOne({id: id});
+      if(customer === null){
+        res.status(202).json({message: 'data not found!'});
+      } else {
+        res.status(200).json(customer);
+      }
     } catch (error) {
       res.status(404).json({ message: error.message });
     }

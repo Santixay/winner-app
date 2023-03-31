@@ -8,8 +8,6 @@ const {
   deleteCustomer
 } = require("../controllers/customer.js");
 
-var customer = require('../controllers/customer.js');
-
 const router = express.Router();
 
 router.get("/list", getCustomers);

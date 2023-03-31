@@ -10,5 +10,4 @@ const ProvinceSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Province = mongoose.model("Province", ProvinceSchema);
-export default Province;
+module.exports = mongoose.model("Province", ProvinceSchema);

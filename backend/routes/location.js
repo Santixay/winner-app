@@ -1,11 +1,11 @@
 const express = require("express");
 
-import {
+const {
  getDistrics,
  getProvinces,
  getVillages,
     getRouteByProvinceID,
-} from "../controllers/location.js";
+} = require("../controllers/location.js");
 
 const router = express.Router();
 
@@ -14,4 +14,4 @@ router.get("/districts", getDistrics)
 router.get("/provinces", getProvinces)
 router.get("/get-route-by-province", getRouteByProvinceID)
 
-export default router;
+module.exports = router;

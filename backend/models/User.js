@@ -34,7 +34,7 @@ const UserSchema = new mongoose.Schema(
         id: { type: String, required: true },
         name: { type: String, required: true },
         default: { type: Boolean, required: true },
-        parcelSatus: String
+        parcelSatus: String,
       },
     ],
     validflag: {
@@ -46,5 +46,4 @@ const UserSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const User = mongoose.model("User", UserSchema);
-export default User;
+module.exports = mongoose.model("User", UserSchema);

@@ -31,5 +31,5 @@ const PackageSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Package = mongoose.model("Package", PackageSchema);
-export default Package;
+module.exports = mongoose.model("Package", PackageSchema);
+

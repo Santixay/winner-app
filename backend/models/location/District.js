@@ -10,5 +10,4 @@ const DistrictSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const District = mongoose.model("District", DistrictSchema);
-export default District;
+module.exports = mongoose.model("District", DistrictSchema);

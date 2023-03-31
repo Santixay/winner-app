@@ -18,5 +18,5 @@ const ApilinkSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Apilink = mongoose.model("Apilink", ApilinkSchema);
-export default Apilink;
+module.exports = mongoose.model("Apilink", ApilinkSchema);
+

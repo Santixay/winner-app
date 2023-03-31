@@ -22,6 +22,4 @@ const TrackingLogSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const TrackingLog = mongoose.model("TrackingLog", TrackingLogSchema);
-
-export default TrackingLog;
+module.exports = mongoose.model("TrackingLog", TrackingLogSchema);
