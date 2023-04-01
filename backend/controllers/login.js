@@ -34,7 +34,7 @@ module.exports = {
             defaultStation,
           });
         } else {
-          res.status(204).json({ status: "error", message: "Login failed." });
+          res.status(401).json({ status: "error", message: "Login failed." });
         }
       });
     } else {

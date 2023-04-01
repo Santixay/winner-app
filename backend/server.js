@@ -6,6 +6,8 @@ const morgan = require("morgan");
 const path = require('path');
 require("dotenv").config();
 
+mongoose.set('strictQuery', true);
+
 // Custom import
 const customerRoutes = require("./routes/customer.js");
 const packageRoutes = require("./routes/package.js");

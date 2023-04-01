@@ -428,9 +428,9 @@ module.exports = {
               smsMessage += `\nTotal is ${count} item(s).`;
             }
             smsMessage += "\n\n---------------------------";
-            smsMessage += `\nສິນຄ້າຂ້າງເທິງນີ້ແມ່ນຮ້ານເຮົາຮັບປະກັນໃຫ້ 3 ວັນນັບຈາກມື້ທີ່ແຈ້ງ.\nWarranty: 3 days from today`;
-            smsMessage += `\n\nຖ້າ​ຫາກ​ວ່າ​ລູກຄ້າຕ້ອງ​ການ​ໃຫ້​ພວກ​ເຮົາ​ສົ່ງ​ຕໍ່ພັດສະດຸໃຫ້ ​ກະ​ລຸ​ນາແຈ້ງ​ລາຍ​ລະ​ອຽດ​ທີ່​ຢູ່​ແລະ​ເບີ​ຕິດ​ຕໍ່​ຂອງ​ລູກຄ້າ.​`;
-            smsMessage += `\nIf you want us to forward your parcels, please provide your address detail and contact number.`;
+            smsMessage += `\nສິນຄ້າຂ້າງເທິງນີ້ແມ່ນຮ້ານເຮົາຮັບປະກັນໃຫ້ 3 ວັນນັບຈາກມື້ທີ່ແຈ້ງ,`;
+            smsMessage += `​ກະ​ລຸ​ນາແຈ້ງ​ລາຍ​ລະ​ອຽດ​ທີ່​ຢູ່​ແລະ​ເບີ​ຕິດ​ຕໍ່​ຂອງ​ລູກຄ້າ ຖ້າຕ້ອງ​ການ​ໃຫ້​ສົ່ງ​ຕໍ່.​`;
+            smsMessage += `\nYou have 3 days warranty from today for above items, please provide your address info if you want delivery.`;
             // smsMessage +=`\nຂອບໃຈທີ່ໃຊ້ບໍລິການນຳພວກເຮົາ. \nThanks for using our service.`;
             // smsMessage +=`\nWinner Express`;
           }
@@ -540,8 +540,8 @@ module.exports = {
               smsMessage += `\nTotal is ${count} item(s).`;
             }
           }
-          smsMessage += `\n\nຖ້າມີບັນຫາໃດໆກະລຸນາແຈ້ງພວກເຮົາທັນທີ. \nIf any problems please report us immediately.`;
-          smsMessage += `\nຂອບໃຈທີ່ໃຊ້ບໍລິການນຳພວກເຮົາ. \nThanks for using our service.`;
+          smsMessage += `\n\nຖ້າມີບັນຫາໃດໆກະລຸນາແຈ້ງພວກເຮົາທັນທີ, ຂອບໃຈທີ່ໃຊ້ບໍລິການນຳພວກເຮົາ.`;
+          smsMessage += `\nIf any problems please report us immediately, thanks for using our service.`;
           smsMessage += `\nWinner Express`;
           // Add smsMessage to sumPackage object
           sumPackages[index].smsMessage = smsMessage;
