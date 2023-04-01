@@ -1,0 +1,304 @@
+import React from "react";
+import {
+  Box,
+  // Divider,
+  Drawer,
+  IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Typography,
+  useTheme,
+} from "@mui/material";
+import {
+  // SettingsOutlined,
+  ChevronLeft,
+  ChevronRightOutlined,
+  HomeOutlined,
+  // ShoppingCartOutlined,
+  Groups2Outlined,
+  // ReceiptLongOutlined,
+  // PublicOutlined,
+  // PointOfSaleOutlined,
+  // TodayOutlined,
+  // CalendarMonthOutlined,
+  // AdminPanelSettingsOutlined,
+  // TrendingUpOutlined,
+  // PieChartOutlined,
+} from "@mui/icons-material";
+import QrCodeScannerIcon from "@mui/icons-material/QrCodeScanner";
+import WidgetsIcon from "@mui/icons-material/Widgets";
+import TravelExploreIcon from "@mui/icons-material/TravelExplore";
+import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
+import NavigationIcon from "@mui/icons-material/Navigation";
+import RoomIcon from "@mui/icons-material/Room";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+import DoneAllIcon from "@mui/icons-material/DoneAll";
+import SecurityIcon from '@mui/icons-material/Security';
+
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import FlexBetween from "./FlexBetween";
+// import profileImage from "assets/profile.jpeg";
+
+// const initialItem = [
+//   {
+//     text: "Scan Package",
+//     icon: null,
+//   }
+// ];
+
+const navItems = [
+  {
+    text: "General Management",
+    icon: null,
+  },
+  {
+    text: "Tracking",
+    icon: <TravelExploreIcon />,
+  },
+  {
+    text: "Scan",
+    icon: <QrCodeScannerIcon />,
+  },
+  {
+    text: "Shipping Fee",
+    icon: <MonetizationOnIcon />,
+  },
+  {
+    text: "Packages",
+    icon: <WidgetsIcon />,
+  },
+  {
+    text: "Customers",
+    icon: <Groups2Outlined />,
+  },
+  {
+    text: "Notification",
+    icon: null,
+  },
+
+  {
+    text: "WhatsApp",
+    icon: <WhatsAppIcon />,
+  },
+  {
+    text: "Delivered",
+    icon: <DoneAllIcon />,
+  },
+  {
+    text: "Administration",
+    icon: null,
+  },
+  {
+    text: "Users",
+    icon: <HomeOutlined />,
+  },
+  {
+    text: "Roles",
+    icon: <SecurityIcon/>
+  },
+  {
+    text: "Routes",
+    icon: <NavigationIcon />,
+  },
+  {
+    text: "Stations",
+    icon: <RoomIcon />,
+  },
+
+  // {
+  //   text: "Transactions",
+  //   icon: <ReceiptLongOutlined />,
+  // },
+  // {
+  //   text: "Geography",
+  //   icon: <PublicOutlined />,
+  // },
+  // {
+  //   text: "Sales",
+  //   icon: null,
+  // },
+  // {
+  //   text: "Overview",
+  //   icon: <PointOfSaleOutlined />,
+  // },
+  // {
+  //   text: "Daily",
+  //   icon: <TodayOutlined />,
+  // },
+  // {
+  //   text: "Monthly",
+  //   icon: <CalendarMonthOutlined />,
+  // },
+  // {
+  //   text: "Breakdown",
+  //   icon: <PieChartOutlined />,
+  // },
+  // {
+  //   text: "Management",
+  //   icon: null,
+  // },
+  // {
+  //   text: "Admin",
+  //   icon: <AdminPanelSettingsOutlined />,
+  // },
+  // {
+  //   text: "Performance",
+  //   icon: <TrendingUpOutlined />,
+  // },
+];
+
+const Sidebar = ({
+  user,
+  drawerWidth,
+  isSidebarOpen,
+  setIsSidebarOpen,
+  isNonMobile,
+}) => {
+  const { pathname } = useLocation();
+  const [active, setActive] = useState("");
+  const navigate = useNavigate();
+  const theme = useTheme();
+
+  useEffect(() => {
+    setActive(pathname.substring(1));
+  }, [pathname]);
+
+  return (
+    <Box component="nav">
+      {isSidebarOpen && (
+        <Drawer
+          open={isSidebarOpen}
+          onClose={() => setIsSidebarOpen(false)}
+          variant="persistent"
+          anchor="left"
+          sx={{
+            width: drawerWidth,
+            "& .MuiDrawer-paper": {
+              color: theme.palette.secondary[200],
+              backgroundColor: theme.palette.background.alt,
+              boxSixing: "border-box",
+              borderWidth: isNonMobile ? 0 : "2px",
+              width: drawerWidth,
+            },
+          }}
+        >
+          <Box>
+            <Box width="100%">
+              <Box m="1.5rem 2rem 0rem 3rem">
+                <FlexBetween color={theme.palette.secondary.main}>
+                  <Box display="flex" alignItems="center" gap="0.5rem">
+                    <Typography variant="h4" fontWeight="bold">
+                      Winner Express
+                    </Typography>
+                  </Box>
+                  {!isNonMobile && (
+                    <IconButton
+                      onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+                    >
+                      <ChevronLeft />
+                    </IconButton>
+                  )}
+                </FlexBetween>
+              </Box>
+              <List>
+                {navItems.map(({ text, icon }) => {
+                  if (!icon) {
+                    return (
+                      <Typography key={text} sx={{ m: "2.25rem 0 1rem 3rem" }}>
+                        {text}
+                      </Typography>
+                    );
+                  }
+                  const lcText = text.replace(/\s/g, "").toLowerCase();
+
+                  return (
+                    <ListItem key={text} disablePadding>
+                      <ListItemButton
+                        onClick={() => {
+                          navigate(`/${lcText}`);
+                          setActive(lcText);
+                        }}
+                        sx={{
+                          backgroundColor:
+                            active === lcText
+                              ? theme.palette.secondary[300]
+                              : "transparent",
+                          color:
+                            active === lcText
+                              ? theme.palette.primary[600]
+                              : theme.palette.secondary[100],
+                        }}
+                      >
+                        <ListItemIcon
+                          sx={{
+                            ml: "2rem",
+                            color:
+                              active === lcText
+                                ? theme.palette.primary[600]
+                                : theme.palette.secondary[200],
+                          }}
+                        >
+                          {icon}
+                        </ListItemIcon>
+                        <ListItemText primary={text} />
+                        {active === lcText && (
+                          <ChevronRightOutlined sx={{ ml: "auto" }} />
+                        )}
+                      </ListItemButton>
+                    </ListItem>
+                  );
+                })}
+              </List>
+            </Box>
+
+            {/* <Box position="absolute" bottom="2rem">
+              <Divider />
+              <FlexBetween
+                textTransform="none"
+                gap="1rem"
+                m="1.5rem 2rem 0 3rem"
+              >
+                <Box
+                  component="img"
+                  alt="profile"
+                  src={profileImage}
+                  height="40px"
+                  width="40px"
+                  borderRadius="50%"
+                  sx={{ objectFit: "cover" }}
+                />
+                <Box textAlign="left">
+                  <Typography
+                    fontWeight="bold"
+                    fontSize="0.9rem"
+                    sx={{ color: theme.palette.secondary[100] }}
+                  >
+                    {user.name}
+                  </Typography>
+                  <Typography
+                    fontSize="0.8rem"
+                    sx={{ color: theme.palette.secondary[200] }}
+                  >
+                    {user.occupation}
+                  </Typography>
+                </Box>
+                <SettingsOutlined
+                  sx={{
+                    color: theme.palette.secondary[300],
+                    fontSize: "25px ",
+                  }}
+                />
+              </FlexBetween>
+            </Box> */}
+          </Box>
+        </Drawer>
+      )}
+    </Box>
+  );
+};
+
+export default Sidebar;
