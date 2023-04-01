@@ -29,7 +29,7 @@ module.exports = {
   getDistrics: async (req, res) => {
     try {
       const { pr_id } = req.query;
-      console.log(pr_id);
+      // console.log(pr_id);
       const districts = await District.find({ pr_id: pr_id }).exec();
       res.status(200).json(districts);
     } catch (error) {

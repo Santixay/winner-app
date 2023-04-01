@@ -3,8 +3,8 @@ const Role = require("../models/Role.js");
 module.exports = {
   checkPermission: async (req, res, next) => {
     try {
-      console.log("########## CheckPermission ################");
-      console.log(req.method,req.baseUrl, req.authResult.role )
+      // console.log("########## CheckPermission ################");
+      // console.log(req.method,req.baseUrl, req.authResult.role )
       const { role } = req.authResult;
       const permission = await Role.find({
         role: role,
@@ -12,7 +12,7 @@ module.exports = {
         "permission.path": req.baseUrl,
       }).count();
 
-      console.log("Role Count = ", permission);
+      // console.log("Role Count = ", permission);
       if (permission === 0) {
         return res.status(403).json({
           errors: [

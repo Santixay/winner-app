@@ -93,7 +93,7 @@ module.exports = {
   patchUser: async (req, res) => {
     try {
       const { password, validflag } = req.body;
-      console.log(validflag);
+      // console.log(validflag);
       if (password) {
         const hashPassword = await bcrypt.hash(password, saltRounds);
         User.updateOne(

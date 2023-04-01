@@ -2,6 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const morgan = require("morgan");
+const path = require('path');
 require("dotenv").config();
 
 // Custom import
@@ -21,7 +23,6 @@ const publicRoutes = require("./routes/public.js");
 const { authen } = require("./middleware/authenticate.js");
 const { checkPermission } = require("./middleware/checkPermission.js");
 
-var morgan = require("morgan");
 var app = express();
 app.use(express.json());
 app.use(morgan("common"));
@@ -44,9 +45,17 @@ app.use("/api/apilink", authen, checkPermission, apilinkRoutes);
 /* PUBLIC ROUTES */
 app.use("/api/public", publicRoutes);
 
-app.get("/", function (req, res, next) {
-  res.json({ msg: "This is CORS-enabled for all origins!" });
-});
+// Serve frontend
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "./build")));
+  app.get("/*", (req, res) => {
+    res.sendFile(
+      path.resolve(__dirname, "build", "index.html")
+    );
+  });
+} else {
+  app.get("/", (req, res) => res.send("Please set NODE_ENV to production"));
+}
 
 const PORT = process.env.PORT || 9000;
 

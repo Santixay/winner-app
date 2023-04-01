@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.4f10d16c.css",
+    "main.js": "/static/js/main.f6fec321.js",
+    "static/media/correct-positive-answer.wav": "/static/media/correct-positive-answer.b73794db17ccc1887e11.wav",
+    "static/media/correct-answer-notification.wav": "/static/media/correct-answer-notification.7a746e5a6746454c8485.wav",
+    "static/media/incorrect-sound.wav": "/static/media/incorrect-sound.89eb7b65c9b7166dadbe.wav",
+    "static/media/profile.jpeg": "/static/media/profile.42c126d38ecd6a94419f.jpeg",
+    "index.html": "/index.html",
+    "main.4f10d16c.css.map": "/static/css/main.4f10d16c.css.map",
+    "main.f6fec321.js.map": "/static/js/main.f6fec321.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4f10d16c.css",
+    "static/js/main.f6fec321.js"
+  ]
+}

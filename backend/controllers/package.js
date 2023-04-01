@@ -451,7 +451,7 @@ module.exports = {
   getSumPackagesForDelivered: async (req, res) => {
     try {
       const { station, search = "" } = req.query;
-      console.log(station);
+      // console.log(station);
       var sumPackages = await Package.aggregate([
         ...initialQuery,
         {
