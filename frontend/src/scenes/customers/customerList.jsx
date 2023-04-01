@@ -118,7 +118,7 @@ const CustomerList = () => {
   // values to set in DataGrid
   const [rows, setRows] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [searchInput, setSearchInput] = useState("");
 
   function RefreshCutomersList(page, pageSize, sort, search) {
@@ -131,6 +131,7 @@ const CustomerList = () => {
       } else {
         console.log(res.message);
       }
+      setIsLoading(false)
     });
   }
 
@@ -389,7 +390,7 @@ const CustomerList = () => {
       }}
     >
       <DataGrid
-        // loading={isLoading}
+        loading={isLoading}
         getRowId={(row) => row._id}
         rows={rows || []}
         columns={columns}

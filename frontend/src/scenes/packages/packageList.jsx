@@ -48,6 +48,7 @@ const PackageList = () => {
   const [sort, setSort] = useState({});
   const [search, setSearch] = useState("");
   const [searchInput, setSearchInput] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   // Data to send to back-end
   const [packageId, setPackageId] = useState("");
@@ -80,6 +81,7 @@ const PackageList = () => {
   const [editDialogOpen, setEditDialogOpen] = React.useState(false);
 
   function RefreshPackageList(page, pageSize, sort, search) {
+    setIsLoading(true)
     GetPackageList(page, pageSize, sort, search).then((res) => {
       if (res.status === 200) {
         setRows(res.data.packages);
@@ -87,6 +89,7 @@ const PackageList = () => {
       } else {
         console.log(res.message);
       }
+      setIsLoading(false)
     });
   }
 
@@ -432,6 +435,7 @@ const PackageList = () => {
         }}
       >
         <DataGrid
+          loading={isLoading}
           getRowId={(row) => row._id}
           rows={rows || []}
           columns={columns}
