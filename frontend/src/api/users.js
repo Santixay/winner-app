@@ -2,7 +2,7 @@ import { api } from "./config";
 
 export async function GetUsersList(search = "") {
   try {
-    const response = await api.get("/user/list", {
+    const response = await api().get("/user/list", {
       params: {
         search,
       },
@@ -23,7 +23,7 @@ export async function StoreUser(
   remark
 ) {
   try {
-    const response = await api
+    const response = await api()
       .post("/user/store", {
         name,
         email,
@@ -52,7 +52,7 @@ export async function PatchUser(
   validflag
 ) {
   try {
-    const response = await api
+    const response = await api()
       .patch("/user/patch", {
         _id,
         name,
@@ -73,7 +73,7 @@ export async function PatchUser(
 
 export async function PatchUserPassword(_id, password) {
   try {
-    const response = await api
+    const response = await api()
       .patch("/user/patch", {
         _id,
         password,
@@ -88,7 +88,7 @@ export async function PatchUserPassword(_id, password) {
 
 export async function GetUserDetail(userId) {
   try {
-    const response = await api
+    const response = await api()
       .get("/user/" + userId)
       .then((res) => res.data)
       .catch((error) => error.response);

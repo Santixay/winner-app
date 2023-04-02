@@ -29,11 +29,10 @@ import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import moment from "moment";
-import { getScanText, selectAndFocus, useLocalStorage } from "utils";
+import { getScanText, selectAndFocus } from "utils";
 import { defaultStation, user } from "localStorage";
 
 const Tracking = () => {
-  useLocalStorage();
   const theme = useTheme();
   const [searchTracking, setSearchTracking] = useState("");
   const [currentStation, setCurrentStation] = useState("");

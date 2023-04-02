@@ -17,7 +17,9 @@ import { Alert } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { setUserData, setDefaultStation } from "slices/userSlice";
 import { useNavigate } from "react-router-dom";
-import { getLocalStorageData } from "localStorage";
+import axios from "axios";
+
+const baseUrl = process.env.REACT_APP_BASE_URL + "/public";
 
 function Copyright(props) {
   return (
@@ -55,28 +57,38 @@ export default function SignInSide() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
-    await Login(data.get("email"), data.get("password")).then((res) => {
-      if (res.status === 200) {
-        setLoginFailed(false);
-        setUserState(res.data.user, res.data.defaultStation);
-        console.log(res.data);
-        localStorage.setItem("token", res.data.token);
-        localStorage.setItem("user", JSON.stringify(res.data.user));
-        localStorage.setItem(
-          "defaultStation",
-          JSON.stringify(res.data.defaultStation)
-        );
-        getLocalStorageData();
-        navigate("/tracking");
-      } else {
-        setLoginFailed(true);
-      }
-    });
+    await axios
+      .post(baseUrl + "/login", {
+        email: data.get("email"),
+        password: data.get("password"),
+      })
+      .then((res) => {
+        if (res && res.status === 200) {
+          setLoginFailed(false);
+          setUserState(res.data.user, res.data.defaultStation);
+          console.log(res.data);
+          localStorage.setItem("token", res.data.token);
+          localStorage.setItem("user", JSON.stringify(res.data.user));
+          localStorage.setItem(
+            "defaultStation",
+            JSON.stringify(res.data.defaultStation)
+          );
+          navigate("/tracking");
+        }
+      })
+      .catch(function (error) {
+        console.log(error.response.status); // 401
+        console.log(error.response.data.error); //Please Authenticate or whatever returned from server
+        if (error.response.status === 401) {
+          console.log("login failed");
+          setLoginFailed(true);
+        }
+      });
   };
 
   React.useEffect(() => {
     const token = localStorage.getItem("token");
-    if (token) {
+    if (typeof token === "string" && token.length > 0) {
       Authen(token).then((res) => {
         if (res.status === 200) {
           navigate("/tracking");

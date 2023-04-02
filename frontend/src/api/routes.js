@@ -2,7 +2,7 @@ import { api } from "./config";
 
 export async function GetRouteList() {
   try {
-    const response = await api.get("/route/list");
+    const response = await api().get("/route/list");
     return response;
   } catch (error) {
     console.error(error);
@@ -11,7 +11,7 @@ export async function GetRouteList() {
 
 export async function GetRouteDetail(routeId) {
   try {
-    const response = await api.get("/route/detail", {
+    const response = await api().get("/route/detail", {
       params: {
         id: routeId,
       },
@@ -24,7 +24,7 @@ export async function GetRouteDetail(routeId) {
 
 export async function GetRouteByProvince(pr_id) {
   try {
-    const response = await api.get(
+    const response = await api().get(
       "/location/get-route-by-province",
       {
         params: {

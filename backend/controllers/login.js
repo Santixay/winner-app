@@ -34,11 +34,11 @@ module.exports = {
             defaultStation,
           });
         } else {
-          res.status(401).json({ status: "error", message: "Login failed." });
+          res.status(401).json({ status: "error", message: "Email or password is invalid!" });
         }
       });
     } else {
-      res.status(404).json({ message: "User not found" });
+      res.status(401).json({status: "error", message: "Email or password is invalid!" });
     }
   },
 };

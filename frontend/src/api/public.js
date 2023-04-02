@@ -10,20 +10,6 @@ export async function Authen(token) {
   }
 }
 
-export async function Login(email, password) {
-  console.log('login api called')
-  try {
-    console.log(email, password);
-    const response = await axios.post(baseUrl + "/login", {
-      email,
-      password,
-    });
-    return response;
-  } catch (error) {
-    console.log(error);
-  }
-}
-
 export async function GetPackageDetailByTracking(tracking) {
   try {
     const response = await axios.get(baseUrl + "/package-detail", {

@@ -38,12 +38,10 @@ import {
   playCorrectSound,
   playIncorrectSound,
   selectAndFocus,
-  useLocalStorage,
 } from "utils";
 import { user, defaultStation } from "localStorage";
 
 const Scan = () => {
-  useLocalStorage();
   const theme = useTheme();
   const [tracking, setTracking] = useState("");
   const [stationList, setStationList] = useState(null);
@@ -61,9 +59,11 @@ const Scan = () => {
   const [sort, setSort] = useState({});
   const [search, setSearch] = useState("");
   const [searchInput, setSearchInput] = useState("");
+  const _user = user();
+  const _defaultStation = defaultStation();
 
   useEffect(() => {
-    console.log(user, defaultStation);
+    console.log(user, _defaultStation);
   }, []);
 
   function RefreshPackagesList(
@@ -122,8 +122,8 @@ const Scan = () => {
   ]);
 
   useEffect(() => {
-    setStationList(user.stations);
-    setSelectedStation(defaultStation);
+    setStationList(_user.stations);
+    setSelectedStation(_defaultStation);
   }, []);
 
   async function checkIsStationValid(
@@ -169,7 +169,7 @@ const Scan = () => {
             if (res.status === 200) {
               // let account = "Test account"; //This should be get from current logged in account
               playCorrectSound();
-              let actionBy = user.name;
+              let actionBy = _user.name;
               StoreTrackingLog(
                 data._id,
                 data.tracking,

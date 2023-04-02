@@ -1,9 +1,6 @@
 import correctSound from "../sound/correct-answer-notification.wav";
 import incorrectSound from "../sound/incorrect-sound.wav";
 import alertSound from "../sound/correct-positive-answer.wav";
-import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
-import { getLocalStorageData } from "localStorage";
 
 export function copyTextToClipboard(
   text = "Please provide text to copy to clipboard!"
@@ -57,12 +54,3 @@ export function playAlertSound() {
   var audio = new Audio(alertSound);
   audio.play();
 }
-
-export const useLocalStorage = () => {
-  const location = useLocation();
-  useEffect(() => {
-    console.log("location", location);
-
-    getLocalStorageData();
-  }, [location]);
-};

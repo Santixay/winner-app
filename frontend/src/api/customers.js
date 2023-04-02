@@ -10,7 +10,7 @@ export async function StoreCustomer(
   validflag = true
 ) {
   try {
-    const responseData = await api
+    const responseData = await api()
       .post( "/customer/store", {
         name,
         whatsapp,
@@ -39,7 +39,7 @@ export async function PatchCustomer(
   remark
 ) {
   try {
-    const responseData = await api
+    const responseData = await api()
       .patch( "/customer/patch", {
         _id,
         name,
@@ -62,7 +62,7 @@ export async function DeleteCustomer(id) {
   try {
     const url =  "/customer/delete/" + id;
     console.log(url);
-    const responseData = await api
+    const responseData = await api()
       .delete( "/customer/delete/" + id)
       .then((res) => res.data)
       .catch((error) => error.response);
@@ -79,7 +79,7 @@ export async function GetCustomersList(
   search = ""
 ) {
   try {
-    const response = await api.get( "/customer/list", {
+    const response = await api().get( "/customer/list", {
       params: {
         page,
         pageSize,

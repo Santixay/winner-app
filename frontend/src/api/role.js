@@ -2,7 +2,7 @@ import { api } from "./config";
 
 export async function GetRoleList() {
   try {
-    const response = await api.get("/role/list");
+    const response = await api().get("/role/list");
     return response;
   } catch (error) {
     console.error(error);
@@ -11,7 +11,7 @@ export async function GetRoleList() {
 
 export async function GetRoleDetail(routeId) {
   try {
-    const response = await api.get("/role/detail", {
+    const response = await api().get("/role/detail", {
       params: {
         id: routeId,
       },
@@ -31,7 +31,7 @@ export async function PatchRole(
   validflag
 ) {
   try {
-    const response = await api
+    const response = await api()
       .patch("/role/patch", {
         _id,
         role,
@@ -50,7 +50,7 @@ export async function PatchRole(
 
 export async function StoreRole(role, description, permission, remark) {
   try {
-    const response = await api
+    const response = await api()
       .post("/role/store", {
         role,
         description,
@@ -67,7 +67,7 @@ export async function StoreRole(role, description, permission, remark) {
 
 export async function GetApiLinks() {
   try {
-    const response = await api.get("/apilink/list");
+    const response = await api().get("/apilink/list");
     return response;
   } catch (error) {
     console.error(error);

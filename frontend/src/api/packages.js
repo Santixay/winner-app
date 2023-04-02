@@ -17,7 +17,7 @@ export async function StorePackage(
 ) {
   try {
     let upperCaseTracking = tracking.toUpperCase();
-    const response = await api
+    const response = await api()
       .post("/package/store", {
         tracking: upperCaseTracking,
         description,
@@ -43,7 +43,7 @@ export async function StorePackage(
 
 export async function GetPackageList(page, pageSize, sort, search) {
   try {
-    const response = await api.get("/package/list", {
+    const response = await api().get("/package/list", {
       params: {
         page,
         pageSize,
@@ -68,7 +68,7 @@ export async function GetPackagesByStationAndDate(
   // from & to format is YYYY-MM-DD
   // station - if empty will return all stations
   try {
-    const response = await api.get("/package/list-by-station-and-date", {
+    const response = await api().get("/package/list-by-station-and-date", {
       params: {
         from,
         to,
@@ -87,7 +87,7 @@ export async function GetPackagesByStationAndDate(
 
 export async function GetSumPackagesForWhatsApp(station, search) {
   try {
-    const response = await api.get("/package/sumpackages", {
+    const response = await api().get("/package/sumpackages", {
       params: {
         station,
         search,
@@ -102,7 +102,7 @@ export async function GetSumPackagesForWhatsApp(station, search) {
 
 export async function GetSumPackagesForDelivered(station, search) {
   try {
-    const response = await api.get("/package/sumpackages-delivered", {
+    const response = await api().get("/package/sumpackages-delivered", {
       params: {
         station,
         search,
@@ -117,7 +117,7 @@ export async function GetSumPackagesForDelivered(station, search) {
 
 export async function GetPackageDetailByTracking(tracking) {
   try {
-    const response = await api.get("/package/tracking", {
+    const response = await api().get("/package/tracking", {
       params: {
         tracking: tracking,
       },
@@ -132,7 +132,7 @@ export async function DeletePackage(id) {
   try {
     const url = "/package/delete/" + id;
     console.log(url);
-    const responseData = await api
+    const responseData = await api()
       .delete("/package/delete/" + id)
       .then((res) => res.data)
       .catch((error) => error.response);
@@ -160,7 +160,7 @@ export async function PatchPackage(
 ) {
   try {
     let upperCaseTracking = tracking.toUpperCase();
-    const responseData = await api
+    const responseData = await api()
       .patch("/package/patch", {
         _id,
         tracking: upperCaseTracking,
@@ -194,7 +194,7 @@ export async function PatchPackageSomeInfo(
   whatsappStatus
 ) {
   try {
-    const response = api
+    const response = api()
       .patch("/package/patch", {
         _id,
         station,
@@ -223,7 +223,7 @@ export async function PatchShippingFee(
 ) {
   try {
     let upperCaseTracking = tracking.toUpperCase();
-    const response = await api
+    const response = await api()
       .patch("/package/patch", {
         _id,
         tracking: upperCaseTracking,

@@ -11,7 +11,7 @@ export async function StoreTrackingLog(
   validflag = true
 ) {
   try {
-    const response = await api
+    const response = await api()
       .post("/trackinglog/store", {
         packageId,
         tracking,
@@ -31,7 +31,7 @@ export async function StoreTrackingLog(
 
 export async function GetTrackingLogList(page, pageSize, sort, search) {
   try {
-    const response = await api.get("/trackinglog/list", {
+    const response = await api().get("/trackinglog/list", {
       params: {
         page,
         pageSize,
@@ -47,7 +47,7 @@ export async function GetTrackingLogList(page, pageSize, sort, search) {
 
 export async function GetTrackingLog(tracking) {
     try {
-      const response = await api.get("/trackinglog/log", {
+      const response = await api().get("/trackinglog/log", {
         params: {
           tracking: tracking,
         },
