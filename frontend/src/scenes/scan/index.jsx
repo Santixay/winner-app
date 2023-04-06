@@ -62,10 +62,6 @@ const Scan = () => {
   const _user = user();
   const _defaultStation = defaultStation();
 
-  useEffect(() => {
-    console.log(user, _defaultStation);
-  }, []);
-
   function RefreshPackagesList(
     from,
     to,

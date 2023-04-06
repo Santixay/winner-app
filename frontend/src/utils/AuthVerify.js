@@ -16,7 +16,7 @@ const AuthVerify = (props) => {
     const token = localStorage.getItem("token")
     if (token) {
       const decodedJwt = parseJwt(token);
-      console.log(decodedJwt);
+      // console.log(decodedJwt);
 
       if (decodedJwt.exp * 1000 < Date.now()) {
         props.logOut();

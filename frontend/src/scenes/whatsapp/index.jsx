@@ -29,13 +29,14 @@ const WhatsApp = () => {
   const [selectedStation, setSelectedStation] = useState(null);
   const [rows, setRows] = useState(null);
   const [succesCount, setSuccessCount] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSending, setIsSending] = useState(false);
 
   // values to be sent to the backend
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(50);
   const [search, setSearch] = useState("");
   const [searchInput, setSearchInput] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
 
   function RefreshPackagesList(station, search) {
     setIsLoading(true);
@@ -88,9 +89,9 @@ const WhatsApp = () => {
   }, [succesCount, selectedStation, search]);
 
   const sendWhatsappMessage = (message, data) => {
+    setIsSending(true);
     let phone = data._id.customer.whatsapp;
-    // console.log(selectedStation)
-    // return
+
     SendMessage(phone, message).then((res) => {
       if (res.status === 200) {
         // console.log(res.data.message);
@@ -117,6 +118,7 @@ const WhatsApp = () => {
           });
         }
       }
+      setIsSending(false);
     });
   };
 
@@ -217,6 +219,7 @@ const WhatsApp = () => {
         return (
           <IconButton
             variant="outlined"
+            disabled={isSending}
             onClick={() => {
               sendWhatsappMessage(cellValues.row.smsMessage, cellValues.row);
             }}

@@ -73,7 +73,7 @@ export default function SignInSide() {
             "defaultStation",
             JSON.stringify(res.data.defaultStation)
           );
-          navigate("/tracking");
+          navigate("/scan");
         }
       })
       .catch(function (error) {

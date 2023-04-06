@@ -33,6 +33,7 @@ const Delivered = () => {
   const [rows, setRows] = useState(null);
   const [succesCount, setSuccessCount] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [isSending, setIsSending] = useState(false);
 
   // values to be sent to the backend
   const [page, setPage] = useState(0);
@@ -44,7 +45,7 @@ const Delivered = () => {
   function RefreshPackagesList(station, search) {
     setIsLoading(true);
     GetSumPackagesForDelivered(station, search).then((res) => {
-      setIsLoading(false)
+      setIsLoading(false);
       if (res.status === 200) {
         // console.log(res.data);
         setRows(res.data);
@@ -94,10 +95,12 @@ const Delivered = () => {
   }, []);
 
   const sendWhatsappMessage = (message, data) => {
+    setIsSending(true);
     let phone = data._id.customer.whatsapp;
     // console.log(data)
     // return;
     SendMessage(phone, message).then((res) => {
+
       if (res.status === 200) {
         console.log(res.data.message);
         const packageDetail = data.packageDetail;
@@ -136,6 +139,7 @@ const Delivered = () => {
           });
         }
       }
+      setIsSending(false);
     });
   };
 
@@ -231,6 +235,7 @@ const Delivered = () => {
         return (
           <IconButton
             variant="outlined"
+            disabled={isLoading}
             onClick={() => {
               sendWhatsappMessage(cellValues.row.smsMessage, cellValues.row);
             }}

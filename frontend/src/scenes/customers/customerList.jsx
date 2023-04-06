@@ -26,6 +26,7 @@ import {
   TextField,
   FormControlLabel,
   Switch,
+  Link,
 } from "@mui/material";
 // import { useGetCustomersQuery } from "state/api";
 import { DataGrid } from "@mui/x-data-grid";
@@ -33,6 +34,7 @@ import DataGridCustomToolbar from "components/DataGridCustomToolbar";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import ClearOutlinedIcon from "@mui/icons-material/ClearOutlined";
 import CloseIcon from "@mui/icons-material/Close";
+import { useNavigate } from "react-router-dom";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -74,6 +76,7 @@ function BootstrapDialogTitle(props) {
 
 const CustomerList = () => {
   const theme = useTheme();
+  const navigate = useNavigate();
 
   const [openEditDialog, setOpenEditDialog] = React.useState(false);
   const [customerId, setCustomerId] = useState("");
@@ -279,10 +282,25 @@ const CustomerList = () => {
       flex: 1,
       hide: true
     },
+    // {
+    //   field: "name",
+    //   headerName: "Name",
+    //   flex: 0.5,
+    // },
     {
-      field: "name",
-      headerName: "Name",
-      flex: 0.5,
+      field: 'name',
+      headerName: 'Name',
+      flex: 1.5,
+      renderCell: (cellValues) => {
+        return (
+          <Link color="white" underline="hover" 
+          onClick={()=> navigate(`/customer/${cellValues.row.id}`)}
+
+          >
+            {cellValues.row.name } - {cellValues.row._id }
+          </Link>
+        );
+      },
     },
     {
       field: "whatsapp",

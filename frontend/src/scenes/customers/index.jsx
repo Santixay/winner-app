@@ -7,7 +7,7 @@ import NewCustomer from "./newCustomer";
 import InactiveCustomer from "./inactiveCustomer";
 
 const Customers = () => {
-
+  
   const tabItems = [
     {
       text: "Customer list",

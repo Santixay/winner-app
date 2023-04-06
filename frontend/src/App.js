@@ -5,6 +5,7 @@ import { useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { themeSettings } from "theme";
+// Admin Scenes
 import Layout from "scenes/layout";
 import Customers from "scenes/customers";
 import Packages from "scenes/packages";
@@ -14,8 +15,12 @@ import WhatsApp from "scenes/whatsapp";
 import ShippingFee from "scenes/shippingfee";
 import Tracking from "scenes/tracking";
 import Delivered from "scenes/delivered";
+// Customer Scenes
+import CustomerMain from "scenes/customerScenes";
+//Public Scenes
 import Login from "scenes/public/login";
 import PublicTracking from "scenes/public/tracking";
+
 import Roles from "scenes/role";
 import { logout } from "utils";
 import AuthVerify from "utils/AuthVerify";
@@ -52,6 +57,7 @@ function App() {
                   <Route path="/tracking" element={<Tracking />} />
                   <Route path="/delivered" element={<Delivered />} />
                   <Route path="/roles" element={<Roles />} />
+                  <Route path="/customer/:id" element={<CustomerMain />} />
                 </Route>
               </>
             ) : (
