@@ -31,6 +31,7 @@ import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import ClearOutlinedIcon from "@mui/icons-material/ClearOutlined";
 import CloseIcon from "@mui/icons-material/Close";
 import { useNavigate } from "react-router-dom";
+import { isMobile } from "react-device-detect";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -310,13 +311,19 @@ const CustomerList = () => {
       headerName: "Address",
       flex: 1,
       valueGetter: (params) => {
-        let address = params.row.province.pr_name;
-        address += params.row.district.dt_name
-          ? ", " + params.row.district.dt_name
-          : "";
-        address += params.row.village.vill_name
-          ? ", " + params.row.village.vill_name
-          : "";
+        let address;
+        if (isMobile) {
+          address = params.row.province.pr_name;
+        } else {
+          address = params.row.province.pr_name;
+          address += params.row.district.dt_name
+            ? ", " + params.row.district.dt_name
+            : "";
+          address += params.row.village.vill_name
+            ? ", " + params.row.village.vill_name
+            : "";
+        }
+
         return address;
       },
     },
@@ -324,6 +331,7 @@ const CustomerList = () => {
       field: "remark",
       headerName: "Remark",
       flex: 1,
+      hide: isMobile,
     },
     {
       field: "validflag",

@@ -2,13 +2,16 @@ import React, { useState } from "react";
 import { Box, useMediaQuery } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { isMobile } from 'react-device-detect';
+
 import Navbar from "components/Navbar";
 import Sidebar from "components/Sidebar";
 import { useGetUserIdQuery } from "state/api";
 
 const Layout = () => {
+  console.log(isMobile)
   const isNonMobile = useMediaQuery("(min-width: 600px)");
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(!isMobile);
   const userId = useSelector((state) => state.global.userId);
   const { data } = useGetUserIdQuery(userId);
 

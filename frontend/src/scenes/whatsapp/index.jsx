@@ -22,6 +22,7 @@ import { copyTextToClipboard } from "utils";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import CheckIcon from "@mui/icons-material/Check";
 import SendIcon from "@mui/icons-material/Send";
+import { isMobile } from "react-device-detect";
 
 const WhatsApp = () => {
   const theme = useTheme();
@@ -182,6 +183,7 @@ const WhatsApp = () => {
       field: "smsMessage",
       headerName: "Message",
       flex: 2,
+      hide: isMobile,
     },
     {
       field: "totalPackages",
@@ -197,6 +199,7 @@ const WhatsApp = () => {
       field: "copy",
       headerName: "Copy",
       flex: 0.2,
+      hide: isMobile,
       renderCell: (cellValues) => {
         return (
           <IconButton
@@ -234,6 +237,7 @@ const WhatsApp = () => {
       field: "success",
       headerName: "Success",
       flex: 0.2,
+      hide: isMobile,
       renderCell: (cellValues) => {
         return (
           <IconButton

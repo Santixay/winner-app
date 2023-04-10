@@ -1,6 +1,7 @@
 import { Box, Grid, Typography } from "@mui/material";
 import { GetCustomerInfo } from "api/customers";
 import React, { useEffect, useState } from "react";
+import { isMobile } from "react-device-detect";
 
 function MyInfo(props) {
   const [customer, setCustomer] = useState(null);
@@ -19,7 +20,7 @@ function MyInfo(props) {
 
   return (
     <Box marginTop={2}>
-      <Grid width="1000px" container spacing={2}>
+      <Grid width={!isMobile ? '700px' : 'auto'} container spacing={2}>
         <Grid item md={2}>
           #ID - Name:{" "}
           <Typography color="secondary">
@@ -32,23 +33,27 @@ function MyInfo(props) {
             {customer && customer.whatsapp}
           </Typography>
         </Grid>
-        <Grid item md={2}>
-          Staus:{" "}
-          <Typography color="secondary">
-            {customer && customer.validflag ? "Active" : "In-active"}
-          </Typography>
-        </Grid>
-        <Grid item md={6}>
-          Address:{" "}
-          <Typography color="secondary">
-            {customer &&
-              customer.province.pr_name +
-                ", " +
-                customer.district.dt_name +
-                ", " +
-                customer.village.vill_name}
-          </Typography>
-        </Grid>
+        {!isMobile && (
+          <>
+            <Grid item md={2}>
+              Staus:{" "}
+              <Typography color="secondary">
+                {customer && customer.validflag ? "Active" : "In-active"}
+              </Typography>
+            </Grid>
+            <Grid item md={6}>
+              Address:{" "}
+              <Typography color="secondary">
+                {customer &&
+                  customer.province.pr_name +
+                    ", " +
+                    customer.district.dt_name +
+                    ", " +
+                    customer.village.vill_name}
+              </Typography>
+            </Grid>
+          </>
+        )}
       </Grid>
     </Box>
   );

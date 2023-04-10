@@ -34,6 +34,7 @@ import { GetRouteByProvince, GetRouteList, GetRouteDetail } from "api/routes";
 import { GetPackageList, DeletePackage, PatchPackage } from "api/packages";
 import Swal from "sweetalert2";
 import { getScanText } from "utils";
+import { isMobile } from "react-device-detect";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -325,6 +326,7 @@ const PackageList = () => {
       field: "orderId",
       headerName: "Order ID",
       flex: 0.5,
+      hide: isMobile,
     },
     {
       field: "tracking",
@@ -340,6 +342,7 @@ const PackageList = () => {
       field: "routeId",
       headerName: "Route ID",
       flex: 0.3,
+      hide: isMobile,
     },
     // {
     //   field: "amount",
@@ -355,6 +358,7 @@ const PackageList = () => {
       field: "shippingFee",
       headerName: "Shipping fee",
       flex: 0.3,
+      hide: isMobile,
     },
     {
       field: "status",
@@ -365,6 +369,7 @@ const PackageList = () => {
       field: "station",
       headerName: "Station",
       flex: 0.5,
+      hide: isMobile,
     },
 
     {
@@ -389,7 +394,7 @@ const PackageList = () => {
       field: "del",
       headerName: "Delete",
       flex: 0.2,
-
+      hide: true,
       renderCell: (cellValues) => {
         return (
           <IconButton

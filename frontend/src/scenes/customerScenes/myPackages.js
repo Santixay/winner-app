@@ -15,6 +15,7 @@ import Swal from "sweetalert2";
 import moment from "moment";
 import FlexBetween from "components/FlexBetween";
 import MyInfo from "./myInfo";
+import { isMobile } from "react-device-detect";
 
 function MyPackages(props) {
   const theme = useTheme();
@@ -98,6 +99,7 @@ function MyPackages(props) {
       field: "orderId",
       headerName: "Order ID",
       flex: 1,
+      hide: isMobile,
     },
     {
       field: "tracking",
@@ -109,17 +111,22 @@ function MyPackages(props) {
       headerName: "Description",
       flex: 3,
       renderCell: (cellValues) => {
-        return cellValues.row.description
-          ? cellValues.row.description
-          : cellValues.row.remark
-          ? <Typography color='secondary'>Remark: {cellValues.row.remark} </Typography> 
-          : "-";
+        return cellValues.row.description ? (
+          cellValues.row.description
+        ) : cellValues.row.remark ? (
+          <Typography color="secondary">
+            Remark: {cellValues.row.remark}{" "}
+          </Typography>
+        ) : (
+          "-"
+        );
       },
     },
     {
       field: "routeId",
       headerName: "Route ID",
       flex: 0.5,
+      hide: isMobile,
     },
     // {
     //   field: "amount",
@@ -140,16 +147,19 @@ function MyPackages(props) {
       field: "status",
       headerName: "Status",
       flex: 0.7,
+      hide: isMobile,
     },
     {
       field: "station",
       headerName: "Station",
       flex: 0.7,
+      hide: isMobile,
     },
     {
       field: "updatedAt",
       headerName: "Updated at",
       flex: 1,
+      hide: isMobile,
       renderCell: (cellValues) => {
         return cellValues.row.updatedAt
           ? moment(cellValues.row.updatedAt)
@@ -162,32 +172,35 @@ function MyPackages(props) {
 
   return (
     <Box marginRight={2}>
-      <Box>
-        <FlexBetween>
-          <Box>
-            <MyInfo id={id} />
-          </Box>
-
-          <Box width="250px">
-            <FormControl fullWidth>
-              <InputLabel>Select status</InputLabel>
-              <Select
-                label="Select status"
-                value={status ? status : ""}
-                onChange={(e) => setStatus(e.target.value)}
-              >
-                {statusList &&
-                  statusList.map((item) => {
-                    return (
-                      <MenuItem key={item} value={item}>
-                        {item}
-                      </MenuItem>
-                    );
-                  })}
-              </Select>
-            </FormControl>
-          </Box>
-        </FlexBetween>
+      <Box
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <Box>
+          <MyInfo id={id} />
+        </Box>
+        <Box width={isMobile ? "100px" : "250px"}>
+          <FormControl fullWidth>
+            <InputLabel>Select status</InputLabel>
+            <Select
+              label="Select status"
+              value={status ? status : ""}
+              onChange={(e) => setStatus(e.target.value)}
+            >
+              {statusList &&
+                statusList.map((item) => {
+                  return (
+                    <MenuItem key={item} value={item}>
+                      {item}
+                    </MenuItem>
+                  );
+                })}
+            </Select>
+          </FormControl>
+        </Box>
       </Box>
       {/*  Data Grid  */}
       <Box

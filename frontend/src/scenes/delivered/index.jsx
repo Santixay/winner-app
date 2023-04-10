@@ -24,6 +24,7 @@ import { PatchPackageSomeInfo, GetSumPackagesForDelivered } from "api/packages";
 import { GetStationDetailById, GetFinalStationList } from "api/stations";
 import { StoreTrackingLog } from "api/trackingLogs";
 import { SendMessage } from "api/whatsapp";
+import { isMobile } from "react-device-detect";
 
 const Delivered = () => {
   const theme = useTheme();
@@ -198,6 +199,7 @@ const Delivered = () => {
       field: "smsMessage",
       headerName: "Message",
       flex: 2,
+      hide: isMobile,
     },
     {
       field: "totalPackages",
@@ -213,6 +215,7 @@ const Delivered = () => {
       field: "copy",
       headerName: "Copy",
       flex: 0.2,
+      hide: isMobile,
       renderCell: (cellValues) => {
         return (
           <IconButton
@@ -250,6 +253,7 @@ const Delivered = () => {
       field: "success",
       headerName: "Success",
       flex: 0.2,
+      hide: isMobile,
       renderCell: (cellValues) => {
         return (
           <IconButton
