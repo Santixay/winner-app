@@ -30,7 +30,6 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import moment from "moment";
 import { getScanText, selectAndFocus } from "utils";
-import { defaultStation, user } from "localStorage";
 
 const Tracking = () => {
   const theme = useTheme();
@@ -48,10 +47,6 @@ const Tracking = () => {
   const [navigator, setNavigator] = useState(null);
   const [trackingLog, setTrackingLog] = useState(null);
   const [packageDetail, setPackageDetail] = useState(null);
-
-  useEffect(()=>{
-    console.log(user, defaultStation);
-  },[])
 
   useEffect(() => {
     if (navigator) {

@@ -16,11 +16,14 @@ const AuthVerify = (props) => {
     const token = localStorage.getItem("token")
     if (token) {
       const decodedJwt = parseJwt(token);
-      // console.log(decodedJwt);
+      // console.log("🚀 ~ file: AuthVerify.js:19 ~ useEffect ~ decodedJwt:", decodedJwt)     
 
-      if (decodedJwt.exp * 1000 < Date.now()) {
+      if (decodedJwt === null || decodedJwt.exp * 1000 < Date.now()) {
         props.logOut();
       }
+    }
+    else if (token === null){
+      props.logOut();
     }
   }, [location, props]);
 

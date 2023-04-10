@@ -56,6 +56,33 @@ export async function GetPackageList(page, pageSize, sort, search) {
     console.error(error);
   }
 }
+
+export async function GetPackagesSumByStatus(customerId) {
+  try {
+    const response = await api().get("/package/sum-by-status", {
+      params: {
+        customerId,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+}
+export async function GetPackagesByCustomerId(customerId, sort, search) {
+  try {
+    const response = await api().get("/package/customer", {
+      params: {
+        customerId,
+        sort: JSON.stringify(sort),
+        search,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+}
 export async function GetPackagesByStationAndDate(
   from = "",
   to = "",

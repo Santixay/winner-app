@@ -44,7 +44,7 @@ module.exports = {
 
         return sortFormatted;
       };
-      const sortFormatted = Boolean(sort) ? generateSort() : {};
+      const sortFormatted = Boolean(sort) ? generateSort() : { updatedAt: -1 };
 
       // const packages = await Package.find({
       //   $or: [
@@ -122,6 +122,68 @@ module.exports = {
         packages,
         total,
       });
+    } catch (error) {
+      res.status(404).json({ message: error.message });
+    }
+  },
+  getPackagesByCustomerId: async (req, res) => {
+    try {
+      // sort should look like this: { "field": "userId", "sort": "desc"}
+      const { customerId, sort = null, search = "" } = req.query;
+      console.log(req.query);
+
+      // formatted sort should look like { userId: -1 }
+      const generateSort = () => {
+        const sortParsed = JSON.parse(sort);
+        const sortFormatted = {
+          [sortParsed.field]: sortParsed.sort === "asc" ? 1 : -1,
+        };
+
+        return sortFormatted;
+      };
+
+      let aggregateQuery = [
+        {
+          // $match: {$and: [{'customerId': customerId}]}
+          $match: {
+            $and: [
+              { customerId },
+              {
+                $or: [
+                  { description: { $regex: new RegExp(search, "i") } },
+                  { tracking: { $regex: new RegExp(search, "i") } },
+                  { orderId: { $regex: new RegExp(search, "i") } },
+                ],
+              },
+            ],
+          },
+        },
+      ];
+
+      const sortFormatted = Boolean(sort) ? generateSort() : { updatedAt: -1 };
+      aggregateQuery.push({ $sort: sortFormatted });
+      console.log(aggregateQuery);
+
+      const packages = await Package.aggregate(aggregateQuery);
+      const total = packages.length;
+
+      res.status(200).json({
+        packages,
+        total,
+      });
+    } catch (error) {
+      res.status(404).json({ message: error.message });
+    }
+  },
+
+  getPackagesSumByStatus: async (req, res) => {
+    try {
+      const { customerId } = req.query;
+      const sumStatus = await Package.aggregate([
+        { $match: { customerId: customerId } },
+        { $group: { _id: "$status", count: { $sum: 1 } } },
+      ]);
+      res.status(200).json({sumStatus});
     } catch (error) {
       res.status(404).json({ message: error.message });
     }
@@ -498,7 +560,7 @@ module.exports = {
             const { name } = packages[0].customer;
             //Header message
             smsMessage = "### ຈັດສົ່ງສຳເລັດ / Delivery confirmation ###";
-            smsMessage += `\nສະບາຍດີ/Hi ${name} (${station})`;
+            // smsMessage += `\nສະບາຍດີ/Hi ${name} (${station})`;
             smsMessage += `\nພັດສະດຸໝາຍເລກຕໍ່ໄປນີ້ແມ່ນລູກຄ້າໄດ້ຮັບ/ເຮົາໄດ້ສົ່ງຕໍ່ໃຫ້ລູກຄ້າແລ້ວ`;
             smsMessage +=
               "\nPlease be informed that the following parcel(s) has been delivered or forwarded to you already.";

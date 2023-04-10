@@ -41,10 +41,10 @@ function App() {
       <BrowserRouter>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <Routes>
-            {/* <Route path="/" element={<Navigate to="/login" replace />} />             */}
-            {localStorage.getItem("token") ? (
-              <>
+          {/* <Route path="/" element={<Navigate to="/login" replace />} />             */}
+          {localStorage.getItem("token") ? (
+            <>
+              <Routes>
                 <Route element={<Layout />}>
                   {/* <Route path="/dashboard" element={<Dashboard />} /> */}
                   <Route path="*" element={<Scan />} />
@@ -59,15 +59,16 @@ function App() {
                   <Route path="/roles" element={<Roles />} />
                   <Route path="/customer/:id" element={<CustomerMain />} />
                 </Route>
-              </>
-            ) : (
-              <>
-                <Route path="*" element={<PublicTracking />} />
-                <Route path="/login" element={<Login />} />
-              </>
-            )}
-          </Routes>
-          <AuthVerify logOut={logOut} />
+              </Routes>
+              <AuthVerify logOut={logOut} />
+            </>
+          ) : (
+            <Routes>
+              <Route path="/" element={<PublicTracking />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="*" element={<Login />} />
+            </Routes>
+          )}
         </ThemeProvider>
       </BrowserRouter>
     </div>

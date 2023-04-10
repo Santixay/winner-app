@@ -16,7 +16,7 @@ import { Login, Authen } from "api/public.js";
 import { Alert } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { setUserData, setDefaultStation } from "slices/userSlice";
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const baseUrl = process.env.REACT_APP_BASE_URL + "/public";
@@ -73,12 +73,12 @@ export default function SignInSide() {
             "defaultStation",
             JSON.stringify(res.data.defaultStation)
           );
-          navigate("/scan");
+          window.location.replace("/scan");      
         }
       })
       .catch(function (error) {
-        console.log(error.response.status); // 401
-        console.log(error.response.data.error); //Please Authenticate or whatever returned from server
+        console.log(error); // 401
+        // console.log(error); //Please Authenticate or whatever returned from server
         if (error.response.status === 401) {
           console.log("login failed");
           setLoginFailed(true);

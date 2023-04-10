@@ -11,7 +11,7 @@ export async function StoreCustomer(
 ) {
   try {
     const responseData = await api()
-      .post( "/customer/store", {
+      .post("/customer/store", {
         name,
         whatsapp,
         province,
@@ -40,7 +40,7 @@ export async function PatchCustomer(
 ) {
   try {
     const responseData = await api()
-      .patch( "/customer/patch", {
+      .patch("/customer/patch", {
         _id,
         name,
         whatsapp,
@@ -60,10 +60,10 @@ export async function PatchCustomer(
 
 export async function DeleteCustomer(id) {
   try {
-    const url =  "/customer/delete/" + id;
+    const url = "/customer/delete/" + id;
     console.log(url);
     const responseData = await api()
-      .delete( "/customer/delete/" + id)
+      .delete("/customer/delete/" + id)
       .then((res) => res.data)
       .catch((error) => error.response);
     return responseData;
@@ -79,7 +79,7 @@ export async function GetCustomersList(
   search = ""
 ) {
   try {
-    const response = await api().get( "/customer/list", {
+    const response = await api().get("/customer/list", {
       params: {
         page,
         pageSize,
@@ -87,6 +87,15 @@ export async function GetCustomersList(
         search,
       },
     });
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function GetCustomerInfo(customerId) {
+  try {
+    const response = await api().get(`/customer/${customerId}`);
     return response;
   } catch (error) {
     console.log(error);

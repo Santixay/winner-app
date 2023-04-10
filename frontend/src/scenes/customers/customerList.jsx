@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import { QueryProvinces, QueryDistrists, QueryVillages } from "api/general";
-import {
-  PatchCustomer,
-  DeleteCustomer,
-  GetCustomersList,
-} from "api/customers";
+import { PatchCustomer, DeleteCustomer, GetCustomersList } from "api/customers";
 import {
   Box,
   useTheme,
@@ -134,7 +130,7 @@ const CustomerList = () => {
       } else {
         console.log(res.message);
       }
-      setIsLoading(false)
+      setIsLoading(false);
     });
   }
 
@@ -169,7 +165,7 @@ const CustomerList = () => {
     setWhatsapp(whatsapp);
     setCustomerId(_id);
     setRemark(remark);
-    setValidflag(validflag)
+    setValidflag(validflag);
     setOpenEditDialog(true);
   };
 
@@ -280,7 +276,7 @@ const CustomerList = () => {
       field: "_id",
       headerName: "ID",
       flex: 1,
-      hide: true
+      hide: true,
     },
     // {
     //   field: "name",
@@ -288,16 +284,18 @@ const CustomerList = () => {
     //   flex: 0.5,
     // },
     {
-      field: 'name',
-      headerName: 'Name',
-      flex: 1.5,
+      field: "name",
+      headerName: "Name",
+      flex: 0.5,
       renderCell: (cellValues) => {
         return (
-          <Link color="white" underline="hover" 
-          onClick={()=> navigate(`/customer/${cellValues.row.id}`)}
-
+          <Link
+            component="button"
+            color="white"
+            underline="hover"
+            onClick={() => navigate(`/customer/${cellValues.row.id}`)}
           >
-            {cellValues.row.name } - {cellValues.row._id }
+            {cellValues.row.name}
           </Link>
         );
       },
@@ -313,22 +311,27 @@ const CustomerList = () => {
       flex: 1,
       valueGetter: (params) => {
         let address = params.row.province.pr_name;
-        address +=  params.row.district.dt_name ? ", " + params.row.district.dt_name : ""
-        address += params.row.village.vill_name ? ", " + params.row.village.vill_name: ""
-        return address
+        address += params.row.district.dt_name
+          ? ", " + params.row.district.dt_name
+          : "";
+        address += params.row.village.vill_name
+          ? ", " + params.row.village.vill_name
+          : "";
+        return address;
       },
     },
     {
       field: "remark",
       headerName: "Remark",
-      flex: 1
+      flex: 1,
     },
     {
       field: "validflag",
       headerName: "Validflag",
       flex: 0.5,
+      hide: true,
       // renderCell: (cellValues)=>{
-      //   return cellValues.validflag ? <ToggleOnIcon/> : <ToggleOffIcon/> 
+      //   return cellValues.validflag ? <ToggleOnIcon/> : <ToggleOffIcon/>
       // }
     },
 
@@ -355,7 +358,7 @@ const CustomerList = () => {
       field: "del",
       headerName: "Delete",
       flex: 0.3,
-      
+      hide: true,
       renderCell: (cellValues) => {
         return (
           <IconButton

@@ -1,20 +1,17 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import MyInfo from "./myInfo";
-import MyStatus from "./myStatus";
 import MyPackages from "./myPackages";
+import { Box } from "@mui/material";
+import Header from "components/Header";
 
 function CustomerMain() {
   const { id } = useParams();
   console.log(id);
   return (
-    <div>
-      <h3> CustomerMain </h3>
-      <h5>{id}</h5>
-      <MyInfo id={id}/>
-      <MyStatus id={id}/>
-      <MyPackages id={id}/>
-    </div>
+    <Box marginLeft={2}>
+      <Header title="Customer Info" />     
+      <MyPackages id={id} />
+    </Box>
   );
 }
 

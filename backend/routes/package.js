@@ -10,19 +10,22 @@ const {
   getPackageListByStationAndDate,
   getSumPackagesForWhatsApp,
   getSumPackagesForDelivered,
+  getPackagesByCustomerId,
+  getPackagesSumByStatus,
 } = require("../controllers/package.js");
-const { authen }  = require("../middleware/authenticate.js");
 
 const router = express.Router();
 
-router.get("/list", authen, getPackages);
-router.get("/id/:id", authen, getPackageDetailById);
-router.post("/store", authen, storePackage);
-router.patch("/patch", authen, patchPackage);
-router.delete("/delete/:id", authen, deletePackage);
+router.get("/customer",  getPackagesByCustomerId);
+router.get("/list",  getPackages);
+router.get("/id/:id",  getPackageDetailById);
+router.post("/store",  storePackage);
+router.patch("/patch",  patchPackage);
+router.delete("/delete/:id",  deletePackage);
 router.get("/tracking", getPackageDetailByTracking);
-router.get("/list-by-station-and-date", authen, getPackageListByStationAndDate);
-router.get("/sumpackages", authen, getSumPackagesForWhatsApp);
-router.get("/sumpackages-delivered", authen, getSumPackagesForDelivered);
+router.get("/list-by-station-and-date",  getPackageListByStationAndDate);
+router.get("/sumpackages",  getSumPackagesForWhatsApp);
+router.get("/sumpackages-delivered",  getSumPackagesForDelivered);
+router.get('/sum-by-status', getPackagesSumByStatus)
 
 module.exports = router;
