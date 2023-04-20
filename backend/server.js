@@ -16,10 +16,12 @@ const locationRoutes = require("./routes/location.js");
 const routeRoutes = require("./routes/route.js");
 const stationRoute = require("./routes/station.js");
 const trackingLogRoutes = require("./routes/trackingLog.js");
-const whatappApiRoutes = require("./routes/whatsappApi.js");
+// const whatappApiRoutes = require("./routes/whatsappApi.js");
 const roleRoutes = require("./routes/role.js");
 const apilinkRoutes = require("./routes/apilink.js");
 const publicRoutes = require("./routes/public.js");
+const accountRoutes = require('./routes/account.js');
+const transactionRoutes = require('./routes/transaction.js')
 
 // Middlewares
 const { authen } = require("./middleware/authenticate.js");
@@ -40,9 +42,11 @@ app.use("/api/location", authen, checkPermission, locationRoutes);
 app.use("/api/route", authen, checkPermission, routeRoutes);
 app.use("/api/station", authen, checkPermission, stationRoute);
 app.use("/api/trackinglog", authen, checkPermission, trackingLogRoutes);
-app.use("/api/whatsapp", authen, checkPermission, whatappApiRoutes);
+// app.use("/api/whatsapp", authen, checkPermission, whatappApiRoutes);
 app.use("/api/role", authen, checkPermission, roleRoutes);
 app.use("/api/apilink", authen, checkPermission, apilinkRoutes);
+app.use('/api/account',accountRoutes);
+app.use('/api/transaction', transactionRoutes);
 
 /* PUBLIC ROUTES */
 app.use("/api/public", publicRoutes);

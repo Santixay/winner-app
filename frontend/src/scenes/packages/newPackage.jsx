@@ -78,7 +78,7 @@ const NewPackage = () => {
       if (res.status === 200) {
         clearForm();
         playCorrectSound();
-        let account = user.name;
+        let account = user().name;
         GetStationDetailById("STD").then((res) => {
           if (res.status === 200) {
             StoreTrackingLog(
