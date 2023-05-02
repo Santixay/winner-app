@@ -3,10 +3,10 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
-const path = require('path');
+const path = require("path");
 require("dotenv").config();
 
-mongoose.set('strictQuery', true);
+mongoose.set("strictQuery", true);
 
 // Custom import
 const customerRoutes = require("./routes/customer.js");
@@ -20,8 +20,8 @@ const trackingLogRoutes = require("./routes/trackingLog.js");
 const roleRoutes = require("./routes/role.js");
 const apilinkRoutes = require("./routes/apilink.js");
 const publicRoutes = require("./routes/public.js");
-const accountRoutes = require('./routes/account.js');
-const transactionRoutes = require('./routes/transaction.js')
+const accountRoutes = require("./routes/account.js");
+const transactionRoutes = require("./routes/transaction.js");
 
 // Middlewares
 const { authen } = require("./middleware/authenticate.js");
@@ -45,8 +45,8 @@ app.use("/api/trackinglog", authen, checkPermission, trackingLogRoutes);
 // app.use("/api/whatsapp", authen, checkPermission, whatappApiRoutes);
 app.use("/api/role", authen, checkPermission, roleRoutes);
 app.use("/api/apilink", authen, checkPermission, apilinkRoutes);
-app.use('/api/account',accountRoutes);
-app.use('/api/transaction', transactionRoutes);
+app.use("/api/account", accountRoutes);
+app.use("/api/transaction", transactionRoutes);
 
 /* PUBLIC ROUTES */
 app.use("/api/public", publicRoutes);
@@ -55,9 +55,7 @@ app.use("/api/public", publicRoutes);
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "./build")));
   app.get("/*", (req, res) => {
-    res.sendFile(
-      path.resolve(__dirname, "build", "index.html")
-    );
+    res.sendFile(path.resolve(__dirname, "build", "index.html"));
   });
 } else {
   app.get("/", (req, res) => res.send("Please set NODE_ENV to production"));
@@ -71,8 +69,8 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-    app.listen(PORT, () =>
-      console.log(`CORS-enabled web server listening on port: ${PORT}`)
-    );
+    app.listen(PORT, () => {
+      console.log(`CORS-enabled web server listening on port: ${PORT}`);   
+    });
   })
   .catch((error) => console.log(`${error} did not connect`));
